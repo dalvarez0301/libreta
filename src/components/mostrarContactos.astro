@@ -1,0 +1,97 @@
+---
+import { Contacto } from "../models/contacto";
+import type { IContacto } from "../types/IContactos";
+
+const contacto = new Contacto();
+
+async function obtenerDatos() {
+  await contacto.obtenerContactos();
+}
+
+await obtenerDatos();
+
+---
+
+<div class="max-w-screen-lg mx-auto mt-10 mr-12 relative overflow-x-auto shadow-md sm:rounded-lg">
+  <table
+    class="w-full text-sm text-left rtl:text-right text-teal-100"
+  >
+    <thead
+      class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-indigo-400 dark:text-indigo-200"
+    >
+      <tr>
+        <th scope="col" class="px-6 py-3"> Cedula </th>
+        <th scope="col" class="px-6 py-3"> Nombres </th>
+        <th scope="col" class="px-6 py-3"> Apellidos </th>
+        <th scope="col" class="px-6 py-3"> Correo </th>
+        <th scope="col" class="px-6 py-3"> Profesión </th>
+        <th scope="col" class="px-6 py-3"> Acción </th>
+      </tr>
+    </thead>
+    <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-slate-50">
+      {
+        contacto.contactos.map((contacto: IContacto) => (
+            <tr data-key="{contacto.cedula}">
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="flex items center">
+                <div>
+                  <p class="text-sm font-semibold text-gray-900 dark:text-indigo-900">
+                    {contacto.cedula}
+                  </p>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="flex items center">
+                <div>
+                  <p class="text-sm font-semibold text-gray-900 dark:text-indigo-900">
+                    {contacto.nombre}
+                  </p>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div
+                class="flex items
+                        center"
+              >
+                <div>
+                  <p class="text-sm font-semibold text-gray-900 dark:text-indigo-900">
+                    {contacto.apellido}
+                  </p>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="flex items center">
+                <div>
+                  <p class="text-sm font-semibold text-gray-900 dark:text-indigo-900">
+                    {contacto.correo}
+                  </p>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="flex items center">
+                <div>
+                  <p class="text-sm font-semibold text-gray-900 dark:text-indigo-900">
+                    {contacto.profesion}
+                  </p>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+              <a 
+              href={`../actualizarContacto?contactId=${contacto.cedula}`}
+                class="text-indigo-600 hover:text-indigo-900"
+                <a 
+                  href="javascript:void(0)">
+                  Editar
+                </a>
+            </td>
+          </tr>          
+        ))
+      }
+    </tbody>
+  </table>
+</div>
